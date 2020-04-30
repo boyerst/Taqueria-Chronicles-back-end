@@ -1,5 +1,5 @@
 import models
-from flask import Blueprint
+from flask import Blueprint, request, jsonify
 
 
 
@@ -14,4 +14,6 @@ def taquerias_index():
 # CREATE /taquerias/
 @taquerias.route('/', methods=['POST'])
 def create_taqueria():
+  payload = request.get_json()
+  print(payload)
   return "taquerias create route hitting"
