@@ -21,6 +21,17 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 
+# USER LOADER
+@login_manager.user_loader
+def load_user(user_id):
+  try:
+    print("loading the following user")
+    user = models.User.get_by_id(user_id)
+    return user 
+  except models.DoesNotExist: 
+    return None
+
+
 app.register_blueprint(taquerias, url_prefix='/api/v1/taquerias')
 app.register_blueprint(users, url_prefix='/api/v1/users')
 
