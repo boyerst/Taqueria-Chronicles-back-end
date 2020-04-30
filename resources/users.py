@@ -56,6 +56,13 @@ def login():
   payload = request.get_json()
   payload['email'] = payload['email'].lower()
   payload['username'] = payload['username'].lower()
+  try: 
+    user = models.User.get(models.User.email == payload['email'])
+
+  except models.DoesNotExist:
+    print('not today')
+
+
   return "check terminal"
 
 
