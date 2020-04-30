@@ -1,5 +1,4 @@
 import models
-
 from flask import Blueprint
 
 

@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 
 from resources.taquerias import taquerias
+from resources.users import users
 
 import models
 
@@ -15,10 +16,17 @@ PORT=8000
 
 app = Flask(__name__)
 
+app.secret_key = "secret time"
+login_manager = LoginManager()
+login_manager.init_app(app)
+
 
 app.register_blueprint(taquerias, url_prefix='/api/v1/taquerias')
+app.register_blueprint(users, url_prefix='/api/v1/users')
+
 
 CORS(taquerias, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(users, origins=['http://localhost:3000'], supports_credentials=True)
 
 # TEST
 @app.route('/')
