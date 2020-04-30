@@ -17,8 +17,8 @@ class User(UserMixin, Model):
 
 class Taqueria(Model):
   name = CharField()
-  patron_id = IntegerField()
-  address = CharField()
+  patron_id = ForeignKeyField(User, backref='taquerias') #Taqueria belongs to User (one user to many Taquerias)
+  address = CharField()                                 #taquerias.patron_id
   zip_code = IntegerField()
   rating = IntegerField()
   recommendations = CharField()
@@ -31,6 +31,6 @@ class Taqueria(Model):
 def initialize():
   DATABASE.connect()
   DATABASE.create_tables([User, Taqueria], safe=True)
-  print("Connected to DB and created tables if they weren't already there")
+  print("Connected to DB and created tables if they had not existed before")
 
   DATABASE.close()

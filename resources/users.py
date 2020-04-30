@@ -73,14 +73,16 @@ def login():
       print("Password does not match")
       return jsonify(
         data={},
-        message="Please try again. If you have not already registered, please do so", 
+        message="Incorrect email or password, please try again.", 
         status=401
       ), 401
   except models.DoesNotExist:
-    print('not today')
-
-
-  return "check terminal"
+    print('Username does not match')
+    return jsonify(
+      data={},
+      message="Incorrect email or password, please try again.", 
+      status=401
+    ), 401
 
 
 
