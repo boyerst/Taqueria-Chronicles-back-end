@@ -35,7 +35,7 @@ def create_taqueria():
     rating=payload['rating'],
     recommendations=payload['recommendations']
   )
-  taqueria_dict = model_to_dict(new_taqueria)
+  taqueria_dict=model_to_dict(new_taqueria)
   print(taqueria_dict)
   taqueria_dict['patron_id'].pop('password')
   return jsonify(
@@ -46,3 +46,9 @@ def create_taqueria():
   
 
   # DESTROY /taquerias/id
+@taquerias.route('/<id>', methods=['DELETE'])
+def delete_taqueria(id):
+  delete=models.Taqueria.delete().where(models.Taqueria.id == id)
+  num_rows=delete.execute()
+  print(num_rows)
+  return "check terminal"

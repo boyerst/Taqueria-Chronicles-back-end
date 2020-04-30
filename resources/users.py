@@ -89,7 +89,11 @@ def login():
 @users.route('/logout', methods=['GET'])
 def logout():
   logout_user()
-  return "logout route hitting"
+  return jsonify(
+    data={}, 
+    message="Thanks for coming, we hope you return to contribute some more Taqueria Chronicles!",
+    status=200
+  ), 200
 
 
 # TEMPORARY 'LIST USERS' ROUTE
