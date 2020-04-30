@@ -18,13 +18,13 @@ def test_user_resource():
 # REGISTER /users/register
 @users.route('/register', methods=['POST'])
 def register():
-  payload = request.get_json()
-  payload['username'] = payload['username'].lower()
-  payload['email'] = payload['email'].lower()
+  payload=request.get_json()
+  payload['username']=payload['username'].lower()
+  payload['email']=payload['email'].lower()
   print(payload)
 
   try:
-    models.User.get(models.User.email == payload['email'])
+    models.User.get(models.User.email==payload['email'])
     return jsonify(
       data={},
       message=f"Sorry, a user with the email {payload['email']} already exists",
@@ -32,14 +32,14 @@ def register():
     ), 401
 
   except models.DoesNotExist:
-    created_user = models.User.create(
+    created_user=models.User.create(
       username=payload['username'],
       email=payload['email'],
       password=generate_password_hash(payload['password'])
     )
     print(created_user)
     login_user(created_user) #NOTE: takes user OBJ and logs them in/starts session
-    created_user_dict = model_to_dict(created_user)
+    created_user_dict=model_to_dict(created_user)
     print(type(created_user_dict['password']))
     created_user_dict.pop('password')
 
@@ -54,12 +54,12 @@ def register():
 @users.route('/login', methods=['POST'])
 def login():
   payload = request.get_json()
-  payload['email'] = payload['email'].lower()
-  payload['username'] = payload['username'].lower()
+  payload['email']=payload['email'].lower()
+  payload['username']=payload['username'].lower()
   try: 
-    user = models.User.get(models.User.email == payload['email'])
+    user=models.User.get(models.User.email==payload['email'])
     user_dict = model_to_dict(user)
-    matching_password = check_password_hash(user_dict['password'], payload['password'])
+    matching_password=check_password_hash(user_dict['password'], payload['password'])
     if(matching_password):
       login_user(user) 
       print(model_to_dict(user))
