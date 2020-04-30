@@ -16,7 +16,7 @@ def taquerias_index():
   print(current_users_taquerias)
   return jsonify({
     'data': current_users_taquerias,
-    'message': f"Here are {len(current_users_taquerias)}",
+    'message': f"Here are {len(current_users_taquerias)} taquerias",
     'status': 200
   }), 200
   
@@ -44,3 +44,5 @@ def create_taqueria():
     status=201
   ), 201
   
+
+  # DESTROY /taquerias/id

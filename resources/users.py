@@ -4,7 +4,7 @@ from flask_bcrypt import generate_password_hash, check_password_hash
 
 from playhouse.shortcuts import model_to_dict
 
-from flask_login import login_user
+from flask_login import login_user, current_user, logout_user
 
 
 users = Blueprint('users', 'users')
@@ -85,6 +85,12 @@ def login():
     ), 401
 
 
+# LOGOUT /users/logout
+@users.route('/logout', methods=['GET'])
+def logout():
+  logout_user()
+  return "logout route hitting"
+
 
 # TEMPORARY 'LIST USERS' ROUTE
 
@@ -98,6 +104,25 @@ def user_all():
   return jsonify(user_dicts), 200
 
 
+# TEMPORARY 'SHOW LOGGED IN USER' ROUTE
+@users.route('/current_user', methods=['GET'])
+def get_current_user():
+  print(current_user)
+  print(type(current_user))
+  if not current_user.is_authenticated: 
+    return jsonify(
+      data={},
+      message="No user logged in",
+      status=401,
+    ), 401
+  else:
+    user_dict = model_to_dict(current_user)
+    user_dict.pop('password')
+    return jsonify(
+      data=user_dict,
+      message=f"Current User = {user_dict['email']}.",
+      status=200
+    ), 200
 
 
 
