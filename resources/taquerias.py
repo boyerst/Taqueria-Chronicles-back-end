@@ -67,7 +67,14 @@ def update_taqueria(id):
   if taqueria_to_update.patron_id.id==current_user.id:
     if 'name' in payload:
       taqueria_to_update.name=payload['name'] 
-  
+    if 'address' in payload:
+      taqueria_to_update.address=payload['address']
+    if 'zip_code' in payload:
+      taqueria_to_update.zip_code=payload['zip_code']
+    if 'rating' in payload:
+      taqueria_to_update.rating=payload['rating']
+    if 'recommendations' in payload:
+      taqueria_to_update.recommendations=payload['recommendations']
     taqueria_to_update.save()
     updated_taq_dict=model_to_dict(taqueria_to_update)
     updated_taq_dict['patron_id'].pop('password')
