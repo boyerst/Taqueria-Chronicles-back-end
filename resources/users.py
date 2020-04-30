@@ -45,7 +45,7 @@ def register():
 
     return jsonify(
         data=created_user_dict,
-        message=f"Welcome! You have successfully registered user {created_user_dict['email']}",
+        message=f"Welcome {created_user_dict['username']}! We are looking forward to your additions to Chicago's own Taqueria Chronicles",
         status=201
       ), 201
 
@@ -58,7 +58,24 @@ def login():
   payload['username'] = payload['username'].lower()
   try: 
     user = models.User.get(models.User.email == payload['email'])
-
+    user_dict = model_to_dict(user)
+    matching_password = check_password_hash(user_dict['password'], payload['password'])
+    if(matching_password):
+      login_user(user) 
+      print(model_to_dict(user))
+      user_dict.pop('password')
+      return jsonify(
+        data=user_dict,
+        message=f"Welcome back {user_dict['username']}! You have successfully logged in.",
+        status=200
+      ), 200
+    else:
+      print("Password does not match")
+      return jsonify(
+        data={},
+        message="Please try again. If you have not already registered, please do so", 
+        status=401
+      ), 401
   except models.DoesNotExist:
     print('not today')
 
