@@ -2,11 +2,11 @@ from peewee import *
 
 
 
-DATABASE = SqliteDatabase('users.sqlite')
+DATABASE = SqliteDatabase('taquerias.sqlite')
 
 
 
-class User(UserMixin, Model):
+class User(Model):
   username=CharField(unique=True)
   email=CharField(unique=True)
   password=CharField() 
