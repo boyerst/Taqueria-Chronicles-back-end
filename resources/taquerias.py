@@ -48,14 +48,22 @@ def create_taqueria():
 # DESTROY /taquerias/id
 @taquerias.route('/<id>', methods=['DELETE'])
 def delete_taqueria(id):
-  delete=models.Taqueria.delete().where(models.Taqueria.id == id)
-  num_of_rows=delete.execute()
-  print(num_of_rows)
-  return jsonify(
-    data={},
-    message="You have deleted {} taqueria with id {}".format(num_of_rows, id),
-    status=200
-  ), 200
+  taqueria_to_delete=models.Taqueria.get_by_id()
+  if taq_to_delete.patron_id==current_user.id:
+    taq_to_delete.delete_instance()
+    return jsonify(
+      data={},
+      message="You have deleted {} taqueria with id {}".format(num_of_rows, id),
+      status=200
+    ), 200
+  else: 
+    return jsonify(
+    data={
+      'error': '403 Forbidden'
+    },
+    message="You do not have permission to delete this Taqueria.",
+    status=403
+    ), 403
 
 
 
@@ -93,9 +101,11 @@ def update_taqueria(id):
     ), 403
 
 
-
-
-    taqueria_to_update.save()
+# SHOW /dogs/id
+@taquerias.route('/<id>', methods=['GET'])
+def show_taqueria(id):
+  dog = models.Taqueria.get_by_id(id)
+  return "show route hitting"
 
 
 
