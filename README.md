@@ -3,4 +3,4 @@
 
 ## Tables and Routes
 
-![alt text](https://i.imgur.com/E5iIAe4.png )
+![alt text](https://i.imgur.com/Ckhpu0K.png )
