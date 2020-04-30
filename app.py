@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 
 
 
@@ -14,7 +14,10 @@ app = Flask(__name__)
 def say_hello():
   return "Hello"
 
-
+# TEST JSON
+@app.route('/test_json')
+def get_json():
+  return jsonify(['json', 'functioning'])
 
 
 
