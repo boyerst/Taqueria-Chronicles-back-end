@@ -89,7 +89,7 @@ def login():
 # TEMPORARY 'LIST USERS' ROUTE
 
 @users.route('/all', methods=['GET'])
-def user_index():
+def user_all():
   users = models.User.select()
   user_dicts = [ model_to_dict(user) for user in users ]
   for user_dict in user_dicts:
