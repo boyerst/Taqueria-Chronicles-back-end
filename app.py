@@ -1,5 +1,7 @@
 from flask import Flask, jsonify
 
+from resources.taquerias import taquerias
+
 import models
 
 
@@ -8,6 +10,9 @@ PORT=8000
 
 
 app = Flask(__name__)
+
+
+app.register_blueprint(taquerias, url_prefix='/api/v1/taquerias')
 
 
 # TEST
