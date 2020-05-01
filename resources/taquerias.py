@@ -101,12 +101,29 @@ def update_taqueria(id):
     ), 403
 
 
-# SHOW /dogs/id
+# SHOW /taquerias/id
 @taquerias.route('/<id>', methods=['GET'])
 def show_taqueria(id):
-  dog = models.Taqueria.get_by_id(id)
-  return "show route hitting"
-
-
+  taqueria=models.Taqueria.get_by_id(id)
+  if not current_user.is_authenticated:
+    return jsonify(
+      data={
+        'name': taqueria.name,
+        'address': taqueria.address,
+        'zip_code': taqueria.zip_code,
+        'rating': taqueria.rating,
+        'recommendations': taqueria.recommendations
+      },
+      message="Here is the taqueria",
+      status=200
+    ), 200
+  else:
+    taqueria_dict=model_to_dict(taqueria)
+    taqueria_dict['patron_id'].pop('password')
+    return jsonify(
+      data=taqueria_dict,
+      message=f"Here is a closer look at taqueria {id}",
+      status=200
+    ), 200
 
 
