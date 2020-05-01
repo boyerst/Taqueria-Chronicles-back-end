@@ -31,6 +31,17 @@ def load_user(user_id):
   except models.DoesNotExist: 
     return None
 
+# LOGIN MANAGER
+@login_manager.unauthorized_handler
+def unauthorized():
+  return jsonify(
+    data={
+      'error': 'The user is not logged in'
+    },
+    message="Forget to login? Please do so - or register if you are new to the Chronicles",
+    status=401
+  ), 401
+
 
 app.register_blueprint(taquerias, url_prefix='/api/v1/taquerias')
 app.register_blueprint(users, url_prefix='/api/v1/users')

@@ -2,13 +2,14 @@ import models
 from flask import Blueprint, request, jsonify
 from playhouse.shortcuts import model_to_dict
 
-from flask_login import current_user
+from flask_login import current_user, login_required
 
 
 taquerias = Blueprint('taquerias', 'taquerias')
 
 # INDEX /taquerias
 @taquerias.route('/', methods=['GET'])
+@login_required
 def taquerias_index():
   current_users_taquerias=[model_to_dict(taqueria) for taqueria in current_user.taquerias]
   for taqueria_dict in current_users_taquerias:
