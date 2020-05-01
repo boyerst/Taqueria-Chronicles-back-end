@@ -25,6 +25,7 @@ def taquerias_index():
 
 # CREATE /taquerias/
 @taquerias.route('/', methods=['POST'])
+@login_required
 def create_taqueria():
   payload=request.get_json()
   print(payload)
@@ -48,23 +49,33 @@ def create_taqueria():
 
 # DESTROY /taquerias/id
 @taquerias.route('/<id>', methods=['DELETE'])
+@login_required
 def delete_taqueria(id):
-  taqueria_to_delete=models.Taqueria.get_by_id()
-  if taq_to_delete.patron_id==current_user.id:
-    taq_to_delete.delete_instance()
+  try:
+    taq_to_delete=models.Taqueria.get_by_id(id)
+    if taq_to_delete.patron_id.id==current_user.id:
+      taq_to_delete.delete_instance()
+      return jsonify(
+        data={},
+        message=f"You have deleted the Taqueria with id {id}",
+        status=200
+      ), 200
+    else: 
+      return jsonify(
+      data={
+        'error': '403 Forbidden'
+      },
+      message="You do not have permission to delete this Taqueria.",
+      status=403
+      ), 403
+  except models.DoesNotExist:
     return jsonify(
-      data={},
-      message="You have deleted {} taqueria with id {}".format(num_of_rows, id),
-      status=200
-    ), 200
-  else: 
-    return jsonify(
-    data={
-      'error': '403 Forbidden'
-    },
-    message="You do not have permission to delete this Taqueria.",
-    status=403
-    ), 403
+      data={
+        'error': '404 Not found'
+      },
+      message="There is no Taqueria with that ID.",
+      status=404
+    ), 404
 
 
 
