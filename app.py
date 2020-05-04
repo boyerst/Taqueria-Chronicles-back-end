@@ -1,3 +1,4 @@
+import os
 from flask import Flask, jsonify, g
 
 from resources.taquerias import taquerias
@@ -5,7 +6,6 @@ from resources.users import users
 
 import models
 
-import os
 
 from flask_cors import CORS
 
@@ -79,10 +79,10 @@ def say_hello():
 def get_json():
   return jsonify(['json', 'functioning'])
 
+
 if 'ON_HEROKU' in os.environ: 
   print('\non heroku!')
   models.initialize()
-
 
 if __name__ == '__main__':
   models.initialize()
