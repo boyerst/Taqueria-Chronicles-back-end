@@ -81,6 +81,7 @@ def delete_taqueria(id):
 
 # UPDATE /taquerias/id
 @taquerias.route('/<id>', methods=['PUT'])
+@login_required
 def update_taqueria(id):
   payload=request.get_json()
   taqueria_to_update=models.Taqueria.get_by_id(id)

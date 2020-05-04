@@ -1,10 +1,16 @@
 from peewee import *
 import datetime
+import os
+from playhouse.db_url import connect
 
 from flask_login import UserMixin
 
-DATABASE = SqliteDatabase('taquerias.sqlite')
 
+
+if 'ON_HEROKU' in os.environ: 
+  DATABASE = connect(os.environ.get('DATABASE_URL')) 
+else:
+  DATABASE = SqliteDatabase('taquerias.sqlite')
 
 
 class User(UserMixin, Model):

@@ -1,9 +1,11 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, g
 
 from resources.taquerias import taquerias
 from resources.users import users
 
 import models
+
+import os
 
 from flask_cors import CORS
 
@@ -16,6 +18,7 @@ PORT=8000
 
 app = Flask(__name__)
 
+
 app.secret_key = "secret time"
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -25,7 +28,7 @@ login_manager.init_app(app)
 @login_manager.user_loader
 def load_user(user_id):
   try:
-    print("loading the following user")
+    print("loading the following user.....")
     user = models.User.get_by_id(user_id)
     return user 
   except models.DoesNotExist: 
@@ -43,12 +46,28 @@ def unauthorized():
   ), 401
 
 
-app.register_blueprint(taquerias, url_prefix='/api/v1/taquerias')
-app.register_blueprint(users, url_prefix='/api/v1/users')
 
-
-CORS(taquerias, origins=['http://localhost:3000'], supports_credentials=True)
 CORS(users, origins=['http://localhost:3000'], supports_credentials=True)
+CORS(taquerias, origins=['http://localhost:3000'], supports_credentials=True)
+
+app.register_blueprint(users, url_prefix='/api/v1/users')
+app.register_blueprint(taquerias, url_prefix='/api/v1/taquerias')
+
+
+@app.before_request 
+def before_request():
+  print("you should see this before each request") 
+  g.db = models.DATABASE
+  g.db.connect()
+
+@app.after_request 
+def after_request(response):
+  print("you should see this after each request") 
+  g.db.close()
+  return response 
+            
+
+
 
 # TEST
 @app.route('/')
@@ -60,6 +79,9 @@ def say_hello():
 def get_json():
   return jsonify(['json', 'functioning'])
 
+if 'ON_HEROKU' in os.environ: 
+  print('\non heroku!')
+  models.initialize()
 
 
 if __name__ == '__main__':
