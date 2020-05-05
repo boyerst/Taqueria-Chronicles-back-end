@@ -28,7 +28,7 @@ login_manager.init_app(app)
 @login_manager.user_loader
 def load_user(user_id):
   try:
-    print("loading the following user.....")
+    print("loading the following user")
     user = models.User.get_by_id(user_id)
     return user 
   except models.DoesNotExist: 
@@ -47,11 +47,11 @@ def unauthorized():
 
 
 
-CORS(users, origins=['http://localhost:3000', 'https://taqueria-time-react.herokuapp.com'], supports_credentials=True)
 CORS(taquerias, origins=['http://localhost:3000', 'https://taqueria-time-react.herokuapp.com'], supports_credentials=True)
+CORS(users, origins=['http://localhost:3000', 'https://taqueria-time-react.herokuapp.com'], supports_credentials=True)
 
-app.register_blueprint(users, url_prefix='/api/v1/users')
 app.register_blueprint(taquerias, url_prefix='/api/v1/taquerias')
+app.register_blueprint(users, url_prefix='/api/v1/users')
 
 
 @app.before_request 
@@ -78,6 +78,9 @@ def say_hello():
 @app.route('/test_json')
 def get_json():
   return jsonify(['json', 'functioning'])
+
+
+
 
 
 if 'ON_HEROKU' in os.environ: 
