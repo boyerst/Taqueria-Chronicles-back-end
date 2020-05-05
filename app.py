@@ -17,7 +17,7 @@ PORT=8000
 
 
 app = Flask(__name__)
-
+CORS(app)
 
 app.secret_key = "secret time"
 login_manager = LoginManager()
@@ -41,9 +41,10 @@ def unauthorized():
     data={
       'error': 'The user is not logged in'
     },
-    message='Forget to login? Please do so - or register if you are new to the Chronicles',
+    message='Forget to login? Please do so - or register u are new to the Chronicles',
     status=401
   ), 401
+
 
 
 
