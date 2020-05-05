@@ -48,8 +48,8 @@ def unauthorized():
 
 
 
-CORS(taquerias, origins=['http://localhost:3000', 'https://taqueria-time-react.herokuapp.com/'], supports_credentials=True)
-CORS(users, origins=['http://localhost:3000', 'https://taqueria-time-react.herokuapp.com/'], supports_credentials=True)
+CORS(taquerias, origins=['http://localhost:3000', 'https://taqueria-time-react.herokuapp.com'], supports_credentials=True)
+CORS(users, origins=['http://localhost:3000', 'https://taqueria-time-react.herokuapp.com'], supports_credentials=True)
 
 app.register_blueprint(taquerias, url_prefix='/api/v1/taquerias')
 app.register_blueprint(users, url_prefix='/api/v1/users')
