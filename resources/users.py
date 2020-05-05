@@ -9,7 +9,7 @@ from flask_login import login_user, current_user, logout_user
 
 users = Blueprint('users', 'users')
 
-# TEST /users
+TEST /users
 @users.route('/', methods=['GET'])
 def test_user_resource(): 
   return "user resource functioning" 
@@ -27,7 +27,7 @@ def register():
     models.User.get(models.User.email==payload['email'])
     return jsonify(
       data={},
-      message=f"Sorry, a user with the email {payload['email']} already exists",
+      # message=f"Sorry, a user with the email {payload['email']} already exists",
       status=401
     ), 401
 
@@ -45,7 +45,7 @@ def register():
 
     return jsonify(
         data=created_user_dict,
-        message=f"Welcome {created_user_dict['username']}! We are looking forward to your additions to Chicago's own Taqueria Chronicles",
+        # message=f"Welcome {created_user_dict['username']}! We are looking forward to your additions to Chicago's own Taqueria Chronicles",
         status=201
       ), 201
 
@@ -55,7 +55,7 @@ def register():
 def login():
   payload = request.get_json()
   payload['email']=payload['email'].lower()
-  payload['username']=payload['username'].lower()
+  # payload['username']=payload['username'].lower()
   try: 
     user=models.User.get(models.User.email==payload['email'])
     user_dict = model_to_dict(user)
@@ -66,21 +66,21 @@ def login():
       user_dict.pop('password')
       return jsonify(
         data=user_dict,
-        message=f"Welcome back {user_dict['username']}! You have successfully logged in.",
+        # message=f"Welcome back {user_dict['username']}! You have successfully logged in.",
         status=200
       ), 200
     else:
       print("Password does not match")
       return jsonify(
         data={},
-        message="Incorrect email or password, please try again.", 
+        # message="Incorrect email or password, please try again.", 
         status=401
       ), 401
   except models.DoesNotExist:
     print('Username does not match')
     return jsonify(
       data={},
-      message="Incorrect email or password, please try again.", 
+      # message="Incorrect email or password, please try again.", 
       status=401
     ), 401
 
@@ -91,7 +91,7 @@ def logout():
   logout_user()
   return jsonify(
     data={}, 
-    message="Thanks for coming, we hope you return to contribute some more Taqueria Chronicles!",
+    # message="Thanks for coming, we hope you return to contribute some more Taqueria Chronicles!",
     status=200
   ), 200
 
