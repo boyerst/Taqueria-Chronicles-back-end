@@ -38,5 +38,4 @@ def initialize():
   DATABASE.connect()
   DATABASE.create_tables([User, Taqueria], safe=True)
   print("Connected to DB and created tables if they had not existed before")
-
   DATABASE.close()

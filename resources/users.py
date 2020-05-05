@@ -80,9 +80,9 @@ def login():
     print('Username does not match')
     return jsonify(
       data={},
-      message="erre", 
-      status="CORS requested header not allowed"
-    )
+      message="Incorrect email or password, please try again.", 
+      status=401
+    ), 401
 
 
 # LOGOUT /users/logout
