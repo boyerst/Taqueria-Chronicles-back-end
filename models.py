@@ -23,8 +23,8 @@ class User(UserMixin, Model):
 
 class Taqueria(Model):
   name = CharField()
-  patron_id = ForeignKeyField(User, backref='taquerias') #Taqueria belongs to User (one user to many Taquerias)
-  address = CharField()                                 #taquerias.patron_id
+  patron_id = ForeignKeyField(User, backref='taquerias') 
+  address = CharField()                                 
   zip_code = IntegerField()
   rating = IntegerField()
   recommendations = CharField()
