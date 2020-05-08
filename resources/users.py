@@ -57,9 +57,9 @@ def login():
   payload['email']=payload['email'].lower()
   payload['username']=payload['username'].lower()
   try: 
-    user=models.User.get(models.User.email==payload['email'])
+    user = models.User.get(models.User.email == payload['email'])
     user_dict = model_to_dict(user)
-    matching_password=check_password_hash(user_dict['password'], payload['password'])
+    matching_password = check_password_hash(user_dict['password'], payload['password'])
     if(matching_password):
       login_user(user) 
       print(model_to_dict(user))
