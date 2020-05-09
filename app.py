@@ -37,15 +37,15 @@ def load_user(user_id):
     return None
 
 # LOGIN MANAGER
-# @login_manager.unauthorized_handler
-# def unauthorized():
-#   return jsonify (
-#     data={
-#       'error': 'The user is not logged in'
-#     },
-#     message='Forget to login? Please do so - or register u are new to the Chronicles',
-#     status=401
-#   ), 401
+@login_manager.unauthorized_handler
+def unauthorized():
+  return jsonify (
+    data={
+      'error': 'The user is not logged in'
+    },
+    message='Forget to login? Please do so - or register u are new to the Chronicles',
+    status=401
+  ), 401
 
 
 
