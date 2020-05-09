@@ -15,7 +15,7 @@ def taquerias_index():
   for taqueria_dict in current_users_taquerias:
     taqueria_dict['patron_id'].pop('password')
   print(current_users_taquerias)
-  return res.json({
+  return jsonify({
     'data': current_users_taquerias,
     'message': f"Here are {len(current_users_taquerias)} taquerias",
     'status': 200

@@ -1,11 +1,11 @@
 import os
-from flask import Flask, jsonify, g
-
+from flask import Flask
+from flask import jsonify
+from flask import g
 from resources.taquerias import taquerias
 from resources.users import users
 
 import models
-
 
 from flask_cors import CORS
 
