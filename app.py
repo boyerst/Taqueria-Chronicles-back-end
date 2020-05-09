@@ -13,7 +13,7 @@ from flask_cors import CORS
 from flask_login import LoginManager
 
 
-DEBUG=False
+DEBUG=True
 PORT=8000
 
 
