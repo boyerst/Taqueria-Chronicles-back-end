@@ -25,6 +25,8 @@ app.secret_key = "secret time"
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+secure: (process.env.NODE_ENV == 'production')
+
 
 # USER LOADER
 @login_manager.user_loader
