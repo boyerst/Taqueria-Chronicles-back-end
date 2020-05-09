@@ -15,6 +15,7 @@ from flask_login import LoginManager
 
 DEBUG=True
 PORT=8000
+ALLOWED_HOSTS = [".herokuapp.com"]
 
 
 app = Flask(__name__)
