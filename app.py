@@ -1,5 +1,6 @@
 import os
 from flask import Flask
+from flask import make_response, Response
 from flask import jsonify
 from flask import g
 from resources.taquerias import taquerias
