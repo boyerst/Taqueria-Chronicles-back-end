@@ -1,8 +1,8 @@
-import os
 from flask import Flask
-from flask import make_response, Response
-from flask import jsonify
 from flask import g
+from flask import jsonify
+import os
+from flask import make_response, Response
 from resources.taquerias import taquerias
 from resources.users import users
 
