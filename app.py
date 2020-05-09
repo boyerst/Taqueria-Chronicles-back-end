@@ -39,7 +39,7 @@ def load_user(user_id):
 # LOGIN MANAGER
 @login_manager.unauthorized_handler
 def unauthorized():
-  return jsonify(
+  return res.json(
     data={
       'error': 'The user is not logged in'
     },
