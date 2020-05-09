@@ -72,15 +72,15 @@ def after_request(response):
 
 
 
-# TEST
-@app.route('/')
-def say_hello():
-  return "Hello"
+# # TEST
+# @app.route('/')
+# def say_hello():
+#   return "Hello"
 
-# TEST JSON
-@app.route('/test_json')
-def get_json():
-  return jsonify(['json', 'functioning'])
+# # TEST JSON
+# @app.route('/test_json')
+# def get_json():
+#   return jsonify(['json', 'functioning'])
 
 
 
