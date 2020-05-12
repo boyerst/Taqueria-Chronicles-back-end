@@ -93,6 +93,6 @@ if 'ON_HEROKU' in os.environ:
   print('\non heroku!')
   models.initialize()
 
-if __name__ == '__main__':
-  models.initialize()
-  app.run(debug=DEBUG, port=PORT)
+# if __name__ == '__main__':
+#   models.initialize()
+#   app.run(debug=DEBUG, port=PORT)
