@@ -9,7 +9,7 @@ taquerias = Blueprint('taquerias', 'taquerias')
 
 # INDEX /taquerias
 @taquerias.route('/', methods=['GET'])
-@login_required
+# @login_required
 def taquerias_index():
   current_users_taquerias=[model_to_dict(taqueria) for taqueria in current_user.taquerias]
   for taqueria_dict in current_users_taquerias:
