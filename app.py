@@ -25,7 +25,8 @@ app.secret_key = "secret time"
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-
+print("secret keyAEWTERGEWRGEWRGE EWRGERTGEWRGEGHERht")
+print(app.secret_key)
 
 
 # USER LOADER
