@@ -15,11 +15,11 @@ from flask_login import LoginManager
 
 DEBUG=True
 PORT=8000
-ALLOWED_HOSTS = [".herokuapp.com"]
+
 
 
 app = Flask(__name__)
-CORS(app)
+
 
 app.secret_key = "secret time"
 login_manager = LoginManager()
