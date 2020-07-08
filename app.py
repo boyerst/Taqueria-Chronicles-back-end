@@ -16,7 +16,7 @@ from flask_login import LoginManager
 DEBUG=True
 PORT=8000
 
-
+TESTING
 
 app = Flask(__name__)
 
